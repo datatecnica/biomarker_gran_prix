@@ -1,0 +1,70 @@
+kind	target	true_effect	effect_scale	CHR	POS	effect_allele	other_allele	index_snp
+linear_main	rs37486136	-0.298834	beta_per_allele	3	4.75528e+07	G	C	
+linear_main	rs83826969	0.358347	beta_per_allele	20	1.47437e+08	A	T	
+linear_main	rs28509936	0.32041	beta_per_allele	11	1.88718e+08	C	T	
+linear_main	rs3112342	0.527304	beta_per_allele	14	1.28789e+08	G	A	
+linear_main	rs28618844	-0.308574	beta_per_allele	16	1.63721e+07	T	C	
+linear_main	rs75165081	-0.510328	beta_per_allele	7	1.66041e+08	A	C	
+linear_main	rs39423696	-0.47663	beta_per_allele	12	1.06093e+08	C	G	
+linear_main	rs13936515	-0.445834	beta_per_allele	9	6.24259e+07	A	T	
+linear_main	rs93418496	0.365626	beta_per_allele	12	3.03462e+06	T	A	
+linear_main	rs47211198	0.296766	beta_per_allele	3	9.95913e+07	G	T	
+linear_main	rs84391162	-0.563173	beta_per_allele	20	6.88801e+07	C	A	
+linear_main	rs92203642	-0.41189	beta_per_allele	4	1.01244e+08	C	A	
+linear_main	rs76904798	0.5	beta_per_allele	12	4.034e+07	T	A	
+snpxtime	rs78554142	-0.101701	beta_per_allele_per_year	17	4.33295e+07	G	A	
+snpxtime	rs43629842	-0.166912	beta_per_allele_per_year	10	9.03851e+07	A	C	
+snpxtime	rs33366867	0.176076	beta_per_allele_per_year	17	1.16927e+08	T	A	
+snpxtime	rs81970915	0.137909	beta_per_allele_per_year	1	1.38977e+07	A	C	
+snpxtime	rs38144077	0.130529	beta_per_allele_per_year	9	6.45294e+07	C	T	
+snpxtime	rs40318352	-0.192048	beta_per_allele_per_year	4	5.99441e+07	C	G	
+snpxtime	rs99539896	0.179566	beta_per_allele_per_year	16	6.31426e+07	C	G	
+snpxtime	rs42331247	-0.107175	beta_per_allele_per_year	13	2.68805e+07	G	C	
+snpxtime	rs88078431	-0.178354	beta_per_allele_per_year	15	2.87468e+07	C	A	
+snpxtime	rs95456322	-0.167015	beta_per_allele_per_year	2	2.28962e+08	C	G	
+snpxtime	rs96272765	-0.167504	beta_per_allele_per_year	9	7.38602e+07	G	A	
+snpxtime	rs1392316	0.221143	beta_per_allele_per_year	17	4.86075e+06	G	A	
+variance	rs46326268	0.468971	log_sd_per_allele	18	3.27081e+07	A	G	
+variance	rs36230845	0.318979	log_sd_per_allele	6	1.54787e+08	G	C	
+variance	rs45732950	0.473631	log_sd_per_allele	18	2.21755e+08	A	C	
+variance	rs57651983	0.40292	log_sd_per_allele	4	4.50093e+07	G	A	
+variance	rs7040632	0.364842	log_sd_per_allele	5	7.30995e+07	T	G	
+variance	rs15190800	0.39351	log_sd_per_allele	7	5.10311e+07	C	A	
+variance	rs88906413	0.448735	log_sd_per_allele	6	8.80491e+07	T	C	
+variance	rs98545015	0.399224	log_sd_per_allele	6	1.84135e+08	G	C	
+variance	rs96879083	0.389018	log_sd_per_allele	22	5.29403e+07	A	G	
+variance	rs29954033	0.346637	log_sd_per_allele	18	3.4999e+07	G	A	
+variance	rs21421186	0.489735	log_sd_per_allele	13	2.15203e+08	T	C	
+variance	rs16399730	0.362455	log_sd_per_allele	12	2.11032e+08	T	A	
+logistic	rs77181149	-0.420258	log_or_per_allele	2	1.33263e+08	G	A	
+logistic	rs21176249	0.661507	log_or_per_allele	8	2.12776e+08	G	T	
+logistic	rs26065390	0.627839	log_or_per_allele	18	7.81799e+07	G	C	
+logistic	rs52619689	0.641377	log_or_per_allele	12	1.88705e+08	A	G	
+logistic	rs85400685	-0.466372	log_or_per_allele	18	1.92009e+08	T	C	
+logistic	rs39847382	-0.499587	log_or_per_allele	15	2.00208e+08	G	A	
+logistic	rs16631837	-0.564075	log_or_per_allele	5	1.8295e+08	C	A	
+logistic	rs95340453	-0.517672	log_or_per_allele	5	1.23906e+08	T	C	
+logistic	rs44297183	-0.577888	log_or_per_allele	9	4.8092e+07	A	G	
+logistic	rs52170564	0.629004	log_or_per_allele	15	6.32775e+07	A	T	
+logistic	rs36515207	0.62952	log_or_per_allele	21	1.25003e+08	C	G	
+logistic	rs95338508	-0.533609	log_or_per_allele	1	1.78335e+08	T	C	
+cox	rs20892510	0.636799	log_hr_per_allele	16	7.31444e+07	G	T	
+cox	rs56201475	-0.558212	log_hr_per_allele	4	1.78159e+08	T	C	
+cox	rs60999001	-0.591503	log_hr_per_allele	8	1.07855e+08	C	A	
+cox	rs74913132	0.42774	log_hr_per_allele	15	1.70701e+08	T	C	
+cox	rs30543286	-0.663057	log_hr_per_allele	4	2.14434e+08	G	C	
+cox	rs39955811	-0.619582	log_hr_per_allele	1	7.13004e+07	G	C	
+cox	rs11192340	0.699873	log_hr_per_allele	4	1.53268e+08	T	A	
+cox	rs18024796	0.646703	log_hr_per_allele	10	2.12691e+08	C	T	
+cox	rs83894229	0.627574	log_hr_per_allele	10	1.40297e+08	A	G	
+cox	rs10219394	0.692491	log_hr_per_allele	9	2.46856e+08	G	C	
+cox	rs39074795	-0.560248	log_hr_per_allele	15	1.50089e+08	C	G	
+cox	rs48394204	-0.449738	log_hr_per_allele	14	2.97297e+07	T	C	
+ld_tag	rs20825849	0.782885	pearson_r_with_index	12	4.09622e+07	A	G	rs76904798
+analyte_main	PRTN0033_NPX	1.18956	beta_on_updrs3_bl					
+analyte_main	PRTN0019_NPX	-1.96676	beta_on_updrs3_bl					
+analyte_main	PRTN0031_NPX	-2.31025	beta_on_updrs3_bl					
+analyte_main	PRTN0018_NPX	-1.24186	beta_on_updrs3_bl					
+analyte_main	PRTN0003_NPX	1.71768	beta_on_updrs3_bl					
+analyte_slope	PRTN0008_NPX	-0.558087	beta_on_updrs3_slope					
+analyte_slope	PRTN0017_NPX	0.572032	beta_on_updrs3_slope					

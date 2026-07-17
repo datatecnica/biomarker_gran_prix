@@ -1,0 +1,28 @@
+# --- full batch outputs (bulky, regenerable; the smoke_* outputs ARE committed as a
+#     ready-to-view example) ---
+results/
+meta/
+plots/
+/results_summary.md
+
+# --- logs / benchmark artifacts ---
+*.log
+bench_results.json
+
+# --- python ---
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# The synthetic test data (synthetic_geno.*, synthetic_clinical-*.tsv, synthetic_truth-*.tsv)
+# IS committed on purpose — it is 100% RNG-generated, so mirroring the repo gives a
+# ready-to-run example with no data-privacy concern.
+#
+# Guard against accidentally committing a REAL genotype fileset, while allowing the
+# synthetic example through:
+*.pgen
+*.bed
+*.bgen
+!synthetic_geno.pgen

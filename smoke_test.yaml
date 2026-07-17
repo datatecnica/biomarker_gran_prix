@@ -1,0 +1,107 @@
+# Biomarker Gran Prix — smoke test against the synthetic dataset.
+# Fast end-to-end coverage of the Phase 2 engine: genetic + tabular linear scans,
+# per-ancestry stratification, and conditional analysis.
+#   python3 gwas.py --config smoke_test.yaml
+defaults:
+  clinical_file: "synthetic_clinical-*.tsv"   # latest glob
+  genotype_prefix: "synthetic_geno"           # -> .pgen/.pvar/.psam
+  sample_id_col: IID
+  time_col: years_from_baseline
+  output_dir: "smoke_results"
+
+  covariates: [AGE, SEX, PC1, PC2, PC3, PC4, PC5]
+
+  # Non-genetic (tabular / non-plink) predictor standardization — mirrors
+  # proteomics_data_mine. Defaults shown; all per-run overridable. Genetic dosages
+  # are never z-scored (raw → β per allele).
+  zscore_predictors: true    # z-score continuous non-genetic predictors
+  zscore_binary: false       # also z-score {0,1} predictors
+  zscore_dosage: false       # also z-score {0,1,2} dosage-coded predictors
+
+  # derive columns once (after prefilter, before the scan): a row-wise expression,
+  # a per-subject longitudinal aggregate, and a genotype pull by variant ID.
+  derive:
+    logLEDD: "log(LEDD + 1)"                 # row-wise clinical expression
+    bmkX_baseline: "baseline_of(bmkX)"       # per-subject baseline value, broadcast
+    G_rs76904798: "snp(rs76904798)"          # index-SNP dosage as a named column
+
+  # variant QC
+  maf_min: 0.01
+  mac_min: 20
+  missing_max: 0.05
+  min_n: 100
+
+runs:
+  # 1) genetic linear, pooled — recover the planted bmkX main-effect SNPs; EAF correct
+  - name: linear_bmkX
+    model: linear
+    outcome: bmkX
+    sample_filter: "visit == 'BL'"
+
+  # 2) per-ancestry — exercises stratification + per-stratum EAF/MAF recompute
+  - name: linear_bmkX_strat
+    model: linear
+    outcome: bmkX
+    sample_filter: "visit == 'BL'"
+    strata_col: ancestry
+    strata: [EUR, AJ]
+
+  # 3) conditional analysis — condition on the index SNP; its LD tag's marginal
+  #    signal (rs20825849, planted in LD with rs76904798) must drop out
+  - name: linear_bmkX_conditional
+    model: linear
+    outcome: bmkX
+    sample_filter: "visit == 'BL'"
+    condition_snps: [rs76904798]
+
+  # 4) conditioning via a DERIVED snp() column used as a covariate — must reproduce
+  #    run (3): the LD tag drops out. Demonstrates derive + covariate equivalence.
+  - name: linear_bmkX_derivecond
+    model: linear
+    outcome: bmkX
+    sample_filter: "visit == 'BL'"
+    add_covariates: [G_rs76904798]
+
+  # 5) logistic case/control — recover planted PD_case SNPs; score test + SPA tail
+  - name: logistic_PD
+    model: logistic
+    outcome: PD_case
+    sample_filter: "visit == 'BL'"
+    spa: true
+
+  # 6) cox time-to-event — recover planted dementia SNPs; score (martingale) + SPACox
+  - name: cox_dementia
+    model: cox
+    duration_col: tte_dementia_years
+    event_col: event_dementia
+    sample_filter: "visit == 'BL'"
+    spa: true
+
+  # 7) slope (two-stage) — per-subject bmkX slope ~ SNP; recover planted SNP×time
+  - name: slope_bmkX
+    model: slope
+    outcome: bmkX
+
+  # 7b) gallop (one-stage RI+slope LMM) — primary rate-of-progression test; reports
+  #     both SNP main and SNP×time. report_term picks the headline (default SNPxTIME)
+  - name: gallop_bmkX
+    model: gallop
+    outcome: bmkX
+    report_term: SNPxTIME
+
+  # 7c) trajgwas (location–scale) — reports SNP effect on the MEAN trajectory AND on
+  #     within-subject VARIABILITY (τ). report_term JOINT = 2-df combined test.
+  - name: trajgwas_bmkX
+    model: trajgwas
+    outcome: bmkX
+    report_term: VAR
+    spa: true
+
+  # 8) tabular predictors (proteomics-style) — no genotype used; recover the
+  #    planted analyte -> updrs3_bl associations
+  - name: analytes_vs_updrs
+    model: linear
+    outcome: updrs3_bl
+    sample_filter: "visit == 'BL'"
+    predictor_source: tabular
+    predictors: {suffix: _NPX}

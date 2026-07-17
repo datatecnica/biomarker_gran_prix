@@ -1,0 +1,75 @@
+Biomarker Gran Prix — Noncommercial License (v1.0)
+
+Copyright (c) 2026 DataTecnica LLC. All rights reserved.
+
+This is a source-available license. It grants broad rights for NONCOMMERCIAL use and
+requires a separate commercial license for COMMERCIAL use. It is NOT an OSI-approved
+open-source license (open-source licenses may not restrict fields of use).
+
+--------------------------------------------------------------------------------
+1. DEFINITIONS
+
+  "Software" means this software and associated files distributed under this License.
+
+  "Noncommercial Use" means use that is not primarily intended for or directed toward
+  commercial advantage or monetary compensation. Noncommercial Use INCLUDES, without
+  limitation, use by:
+    - academic and educational institutions for teaching, learning, and research;
+    - nonprofit organizations for their charitable or scientific purposes;
+    - government and public-health entities for noncommercial research; and
+    - individuals for personal study, research, or evaluation.
+
+  "Commercial Use" means any use that is primarily intended for or directed toward
+  commercial advantage or monetary compensation, including without limitation use by,
+  for, or on behalf of a for-profit entity in the course of its business, use in a
+  commercial product or service, or use to provide paid services.
+
+--------------------------------------------------------------------------------
+2. GRANT FOR NONCOMMERCIAL USE
+
+  Subject to the terms of this License, the copyright holder grants you a worldwide,
+  royalty-free, non-exclusive license to use, reproduce, modify, create derivative
+  works of, and distribute the Software and such derivative works, SOLELY for
+  Noncommercial Use, provided that you:
+    (a) retain this License, the copyright notice, and all attribution notices in all
+        copies and substantial portions of the Software; and
+    (b) clearly attribute the original work (Biomarker Gran Prix, DataTecnica LLC) in
+        any publication or distribution that uses or is derived from the Software; and
+    (c) distribute any derivative works you share under the terms of this License.
+
+--------------------------------------------------------------------------------
+3. COMMERCIAL USE REQUIRES A SEPARATE LICENSE
+
+  Any Commercial Use of the Software is prohibited under this License and requires a
+  separate written commercial license from the copyright holder. To request one,
+  contact: info@datatecnica.com
+
+--------------------------------------------------------------------------------
+4. NO OTHER RIGHTS
+
+  Except as expressly granted above, no rights are granted, by implication, estoppel,
+  or otherwise. All rights not expressly granted are reserved by the copyright holder.
+
+--------------------------------------------------------------------------------
+5. DISCLAIMER OF WARRANTY
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+  INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  PARTICULAR PURPOSE, AND NONINFRINGEMENT. The Software is a research tool and is not
+  intended for clinical or diagnostic use.
+
+--------------------------------------------------------------------------------
+6. LIMITATION OF LIABILITY
+
+  IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT
+  OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+--------------------------------------------------------------------------------
+7. TERMINATION
+
+  This License and the rights granted herein terminate automatically upon any breach
+  by you of its terms. Upon termination you must cease all use and destroy all copies.
+
+--------------------------------------------------------------------------------
+For commercial licensing inquiries: info@datatecnica.com

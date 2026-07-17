@@ -1,0 +1,110 @@
+# Biomarker Gran Prix — full batch configuration.
+#
+# A production-style manifest exercising every model and both predictor modes,
+# per-ancestry stratified where a meta-analysis is wanted. Adapt the `defaults`
+# inputs to point at your own clinical file + plink2 fileset, then:
+#   python3 gwas.py                 --config batch.yaml
+#   python3 meta_analysis.py        --results-dir results/ --output-dir meta/
+#   python3 manhattan_qq.py         --results-dir results/ --meta-dir meta/ --output-dir plots/
+#   python3 build_results_summary.py --results-dir results/ --meta-dir meta/
+#
+# See gwas-README.md for the full schema. Every key has a sensible default (PLAN §9).
+
+defaults:
+  # --- inputs ---
+  clinical_file: "synthetic_clinical-*.tsv"    # non-genetic LONG table; latest glob
+  genotype_prefix: "synthetic_geno"            # -> .pgen/.pvar/.psam (genetic mode)
+  sample_id_col: IID                           # links clinical rows to .psam
+  time_col: years_from_baseline                # longitudinal axis (gallop/slope/trajgwas)
+  output_dir: "results"
+
+  # --- pre-analysis filter on ANY clinical column(s), applied once ---
+  # prefilter:
+  #   - "AGE >= 40"
+
+  # --- covariates: explicit only (PCs are pre-computed covariate columns) ---
+  covariates: [AGE, SEX, PC1, PC2, PC3, PC4, PC5]
+
+  # --- derive columns once (after prefilter, before the scan) ---
+  derive:
+    logLEDD: "log(LEDD + 1)"                   # row-wise clinical expression
+    bmkX_baseline: "baseline_of(bmkX)"         # per-subject baseline, broadcast to visits
+    G_rs76904798: "snp(rs76904798)"            # genotype pulled by variant ID
+
+  # --- per-ancestry stratification (-> meta) ---
+  strata_col: ancestry
+  strata: [EUR, AJ]
+
+  # --- variant QC ---
+  maf_min: 0.01
+  mac_min: 20
+  missing_max: 0.05
+  min_n: 100
+
+  # --- non-genetic predictor standardization (proteomics parity) ---
+  zscore_predictors: true
+  zscore_binary: false
+  zscore_dosage: false
+
+  # --- SPA (two-sided) tail correction thresholds ---
+  spa_p_cutoff: 0.01
+  spa_maf_cutoff: 0.05
+
+  # --- compute (unset -> use the whole machine) ---
+  device: auto
+  block_size: auto
+  prefetch: true
+
+runs:
+  # === cross-sectional ===
+  - name: linear_bmkX                 # quantitative trait, per-ancestry -> meta
+    model: linear
+    outcome: bmkX
+    sample_filter: "visit == 'BL'"
+
+  - name: logistic_PD                 # case/control incidence (score + SPA + Firth)
+    model: logistic
+    outcome: PD_case
+    sample_filter: "visit == 'BL'"
+    spa: true
+
+  - name: locusX_conditional          # conditional analysis: test each SNP GIVEN the index
+    model: linear
+    outcome: bmkX
+    sample_filter: "visit == 'BL'"
+    condition_snps: [rs76904798]
+    strata: [null]                    # pooled (conditioning is most powerful pooled)
+
+  # === longitudinal — continuous rate of progression ===
+  - name: progression_bmkX            # gallop: SNP main + SNP×time
+    model: gallop
+    outcome: bmkX
+    report_term: SNPxTIME
+
+  - name: progression_bmkX_2stage     # slope: robust two-stage cross-check
+    model: slope
+    outcome: bmkX
+    strata: [null]
+
+  - name: variability_bmkX            # trajgwas: mean + within-subject variability (τ)
+    model: trajgwas
+    outcome: bmkX
+    report_term: JOINT
+    spa: true
+
+  # === longitudinal — time-to-event ===
+  - name: incidence_dementia          # cox: HR per allele (score + SPACox + lifelines refit)
+    model: cox
+    duration_col: tte_dementia_years
+    event_col: event_dementia
+    sample_filter: "visit == 'BL'"
+    spa: true
+
+  # === tabular predictors (proteomics-style; no genotype used) ===
+  - name: analytes_vs_updrs           # loop every _NPX column as the tested predictor
+    model: linear
+    outcome: updrs3_bl
+    sample_filter: "visit == 'BL'"
+    predictor_source: tabular
+    predictors: {suffix: _NPX}
+    strata: [null]

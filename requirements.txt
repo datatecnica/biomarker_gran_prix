@@ -1,0 +1,27 @@
+# Biomarker Gran Prix — dependencies (mirrors ../proteomics_data_mine, + GWAS stack)
+#
+# Install:  python3 -m pip install --user -r requirements.txt
+# then install torch separately from the CUDA 12.8 index (see below) — the cu128
+# wheels are not on PyPI, so pip -r cannot fetch them without --index-url.
+
+# --- shared with proteomics_data_mine (already present in this env) ---
+pandas>=2.0,<3.0    # upper bound enforced by lifelines 0.30
+numpy>=1.24
+scipy>=1.11
+statsmodels>=0.14
+lifelines>=0.29     # cox full-fit fallback (Phase 3)
+PyYAML>=6.0
+
+# --- visualization: Manhattan / QQ / summary (Phase 6) ---
+matplotlib>=3.8
+seaborn>=0.13
+adjustText>=1.1
+
+# --- GWAS-specific ---
+Pgenlib>=0.90       # plink2 pgen/pvar/psam reader (Phase 2 genoio.py)
+
+# torch — GPU backend (Phase 0 gpu.py). NOT installed by this file: the RTX 5080
+# (Blackwell, sm_120) needs a CUDA 12.8 build, whose wheels live on a separate
+# index. Install it explicitly:
+#   python3 -m pip install --user torch --index-url https://download.pytorch.org/whl/cu128
+# The engine auto-falls back to the CPU torch build if CUDA is unavailable.
