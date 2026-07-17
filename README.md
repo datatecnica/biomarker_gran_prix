@@ -5,7 +5,7 @@
 > or similar in its use or future development.
 
 A GPU-accelerated, YAML-driven batch **association engine** for biomarker studies —
-a companion to [`../proteomics_data_mine`](../proteomics_data_mine) that reuses its
+a companion to **proteomics_data_mine** that reuses its
 architecture (one config → many runs → one CSV per run×stratum → meta-analysis →
 plots → summary) and generalizes it on two axes:
 
